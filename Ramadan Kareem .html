@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>عداد تنازلي لشهر رمضان</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(45deg, #1a237e, #311b92);
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .time-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            min-width: 100px;
+        }
+        .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .label {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌙 الوقت المتبقي حتى رمضان</h1>
+        <div class="countdown">
+            <div class="time-box">
+                <div id="days" class="number">00</div>
+                <div class="label">يوم</div>
+            </div>
+            <div class="time-box">
+                <div id="hours" class="number">00</div>
+                <div class="label">ساعة</div>
+            </div>
+            <div class="time-box">
+                <div id="minutes" class="number">00</div>
+                <div class="label">دقيقة</div>
+            </div>
+            <div class="time-box">
+                <div id="seconds" class="number">00</div>
+                <div class="label">ثانية</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            // تاريخ بداية رمضان 2025 (تقريباً)
+            const ramadanDate = new Date('March 12, 2025 00:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = ramadanDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+        }
+
+        // تحديث العداد كل ثانية
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
